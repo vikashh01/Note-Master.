@@ -1,4 +1,4 @@
-# Test Plan for Notes Makers Web Application
+# Notes Makers Web Application
 
 ## 1. Introduction
 The Notes Makers web application is designed to allow users to create, edit, delete, and manage notes efficiently. This test plan outlines the testing strategy to ensure the application's functionality, usability, performance, and security.
