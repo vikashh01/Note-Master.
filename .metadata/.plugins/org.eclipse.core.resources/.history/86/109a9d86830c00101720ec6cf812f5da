@@ -1,0 +1,35 @@
+package com.hostinger.pages;
+
+package com.hostinger.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class HomePage {
+    WebDriver driver;
+
+    By logo = By.xpath("//img[@alt='Hostinger']");
+    By hostingLink = By.linkText("Web Hosting");
+    By domainLink = By.linkText("Domain Checker");
+    By loginBtn = By.linkText("Log in");
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public boolean isLogoDisplayed() {
+        return driver.findElement(logo).isDisplayed();
+    }
+
+    public void clickHosting() {
+        driver.findElement(hostingLink).click();
+    }
+
+    public void clickDomainChecker() {
+        driver.findElement(domainLink).click();
+    }
+
+    public void clickLogin() {
+        driver.findElement(loginBtn).click();
+    }
+}

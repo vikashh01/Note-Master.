@@ -1,0 +1,16 @@
+package com.hostinger.tests;
+
+
+import com.hostinger.pages.BaseTest;
+import com.hostinger.pages.HomePage;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class HomePageTest extends BaseTest {
+    
+    @Test
+    public void verifyHomePageElements() {
+        HomePage homePage = new HomePage(driver);
+        Assert.assertTrue(homePage.isLogoDisplayed(), "Logo is missing!");
+    }
+}

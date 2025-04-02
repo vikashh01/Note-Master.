@@ -1,0 +1,52 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() throws InterruptedException {
+        driver = new ChromeDriver();
+        driver.get("https://notes-makers.vercel.app/");
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+    }
+
+    @Test
+    public void testSignup() {
+    	
+    	WebElement Signup = driver.findElement(By.className("flex items-center justify-center"));
+    	Signup.click();
+    	
+        WebElement nameField = driver.findElement(By.xpath("//input[@id='name']"));
+        nameField.sendKeys("vikash");
+
+        WebElement emailField = driver.findElement(By.xpath("//input[@id='email']"));
+        emailField.sendKeys("vikash123@gmail.com");
+
+        WebElement passwordField = driver.findElement(By.xpath("//input[@id='password']"));
+        passwordField.sendKeys("vikash@1234");
+
+        WebElement confirmPasswordField = driver.findElement(By.xpath("//input[@id='confirmPassword']"));
+        confirmPasswordField.sendKeys("vikash@1234");
+
+        WebElement signUpButton = driver.findElement(By.xpath("(//button[contains(@class,'p-3 text-[16px] rounded-md border-2 transition-all duration-300 ease-in-out')])[3]"));
+        signUpButton.click();
+        
+        Thread.sleep(3000);
+
+        
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

@@ -1,0 +1,38 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() throws InterruptedException {
+        driver = new ChromeDriver();
+        driver.get("https://notes-makers.vercel.app/");
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+    }
+
+    @Test
+    public void testSignup() throws InterruptedException {
+    	driver.findElement(By.cssSelector("button:nth-child(2) strong:nth-child(1)")).click();
+    	
+    	driver.findElement(By.xpath("//input[@id='name']")).sendKeys("vikash");
+    	driver.findElement(By.xpath("//input[@id='email']")).sendKeys("vikash@gmail.com");
+    	driver.findElement(By.xpath("//input[@id='password']")).sendKeys("vikash123");
+    	driver.findElement(By.xpath("//input[@id='confirmPassword']")).sendKeys("vikash123");
+    	driver.findElement(By.xpath("//body//div//div//main//div//div//div//div//div//button//strong[contains(text(),'Sign Up')]")).click();
+
+    	Thread.sleep(3000);           
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

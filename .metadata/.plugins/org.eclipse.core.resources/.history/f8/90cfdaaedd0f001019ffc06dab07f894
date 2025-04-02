@@ -1,0 +1,67 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+
+    @BeforeMethod(alwaysRun = true)
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/");
+    }
+
+    @Test(priority = 1)
+    public void testSignup() {
+        driver.findElement(By.cssSelector("button:nth-child(2) strong")).click();
+        driver.findElement(By.id("name")).sendKeys("Akash");
+        driver.findElement(By.id("email")).sendKeys("akash123@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("akash@123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("akash@123");
+        driver.findElement(By.xpath("//button/strong[contains(text(),'Sign Up')]")).click();
+    }
+
+    @Test(priority = 2)
+    public void testLogin() {
+        driver.get("https://notes-makers.vercel.app/pages/login");
+        driver.findElement(By.id("email")).sendKeys("akash123@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("akash@123");
+        driver.findElement(By.xpath("//button/strong[contains(text(),'Login')]")).click();
+    }
+
+    @Test(priority = 3)
+    public void testCreateNote() {
+        driver.get("https://notes-makers.vercel.app/pages/notes");
+        driver.findElement(By.xpath("//strong[normalize-space()='Write Notes']")).click();
+        driver.findElement(By.cssSelector("input[placeholder='Notes Title']")).sendKeys("First Note");
+        driver.findElement(By.cssSelector(".ql-editor")).sendKeys("This is my first note.");
+        driver.findElement(By.xpath("//strong[normalize-space()='Save Changes']")).click();
+    }
+
+    @Test(priority = 4)
+    public void createNotebook() {
+        driver.get("https://notes-makers.vercel.app/pages/notes");
+        driver.findElement(By.xpath("//strong[normalize-space()='Create NoteBook']")).click();
+        driver.findElement(By.id("title")).sendKeys("This is a new notebook.");
+        driver.findElement(By.xpath("//strong[normalize-space()='Submit']")).click();
+    }
+
+    @Test(priority = 5)
+    public void editNote() {
+        driver.get("https://notes-makers.vercel.app/pages/notes");
+        driver.findElement(By.xpath("//strong[normalize-space()='Edit']")).click();
+        driver.findElement(By.cssSelector(".ql-editor")).sendKeys("New update");
+        driver.findElement(By.xpath("//strong[normalize-space()='Save Changes']")).click();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        driver.quit();
+    }
+}

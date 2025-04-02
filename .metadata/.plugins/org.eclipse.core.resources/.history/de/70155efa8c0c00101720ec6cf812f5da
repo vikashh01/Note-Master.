@@ -1,0 +1,88 @@
+package hostingerwebsite;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+
+public class HostingerTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        // Set implicit wait
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+
+        driver.get("https://auth.hostinger.com/login");
+    }
+
+    @Test(priority = 1)
+    public void testLogin() {
+        WebElement emailField = driver.findElement(By.id("email-input"));
+        emailField.sendKeys("vikashkumarbharti035@gmail.com");
+
+        WebElement passwordField = driver.findElement(By.id("password-input"));
+        passwordField.sendKeys("vikash123");
+
+        WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Log in']"));
+        loginButton.click();
+
+        // Validate login by checking URL
+        Assert.assertTrue(driver.getCurrentUrl().contains("hpanel.hostinger.com"), "Login failed!");
+    }
+
+    @Test(priority = 2)
+    public void testNavigateToWebsites() {
+        WebElement websitesTab = driver.findElement(By.xpath("//span[normalize-space()='Websites']"));
+        websitesTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("websites"), "Navigation to Websites failed!");
+    }
+
+    @Test(priority = 3)
+    public void testNavigateToDomains() {
+        WebElement domainsTab = driver.findElement(By.xpath("//button[@class='hp-menu__item-wrapper hp-menu__item-link']//span[@class='hp-menu__item-title'][normalize-space()='Domains']"));
+        domainsTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("domains"), "Navigation to Domains failed!");
+    }
+
+    @Test(priority = 4)
+    public void testNavigateToEmails() {
+        WebElement emailsTab = driver.findElement(By.xpath("//a[@class='hp-menu__item-wrapper hp-menu__item-link']//span[@class='hp-menu__item-title'][normalize-space()='Emails']"));
+        emailsTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("emails"), "Navigation to Emails failed!");
+    }
+
+    @Test(priority = 5)
+    public void testNavigateToVPS() {
+        WebElement vpsTab = driver.findElement(By.xpath("//a[@href='/vps']//div[@class='hp-menu__item-content']"));
+        vpsTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("vps"), "Navigation to VPS failed!");
+    }
+
+    @Test(priority = 6)
+    public void testNavigateToBilling() {
+        WebElement billingTab = driver.findElement(By.xpath("//button[@data-qa='navigate-billing']//div[@class='hp-menu__item-content']"));
+        billingTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("billing"), "Navigation to Billing failed!");
+    }
+
+    @Test(priority = 7)
+    public void testNavigateToMarketplace() {
+        WebElement marketplaceTab = driver.findElement(By.xpath("//button[@data-qa='navigate-marketplace']//div[@class='hp-menu__item-content-wrapper']"));
+        marketplaceTab.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("marketplace"), "Navigation to Marketplace failed!");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

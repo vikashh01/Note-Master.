@@ -1,0 +1,8 @@
+<suite name="QAFox">
+    <test name="Chrome Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.EndToEndTest"/>
+        </classes>
+    </test>
+</suite>

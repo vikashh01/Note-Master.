@@ -1,0 +1,54 @@
+package AllCover;
+
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        // Set up the WebDriver (Make sure ChromeDriver path is set)
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/signup");  // Open the signup page
+    }
+
+    @Test
+    public void testSignup() {
+        // Locate elements and fill the signup form
+        WebElement nameField = driver.findElement(By.id("name"));  // Adjust ID if needed
+        WebElement emailField = driver.findElement(By.id("email")); // Adjust ID if needed
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement confirmPasswordField = driver.findElement(By.id("confirmPassword"));
+        WebElement signupButton = driver.findElement(By.xpath("//button[text()='Sign Up']")); // Adjust if necessary
+
+        // Input values
+        nameField.sendKeys("Test User");
+        emailField.sendKeys("testuser@example.com");
+        passwordField.sendKeys("Test@1234");
+        confirmPasswordField.sendKeys("Test@1234");
+
+        // Click the signup button
+        signupButton.click();
+
+        // Validate signup success (Adjust based on actual behavior)
+        WebElement successMessage = driver.findElement(By.id("successMessage"));  // Update ID if necessary
+        Assert.assertTrue(successMessage.isDisplayed(), "Signup failed!");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        // Close the browser
+        driver.quit();
+    }
+}

@@ -1,0 +1,21 @@
+package cucumber_learning;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class BaseTest {
+    protected static ChromeDriver driver;
+
+    public static void initializeDriver() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+    }
+
+    public void quitDriver() {
+        if (driver != null) {
+            driver.wait();
+        }
+    }
+}

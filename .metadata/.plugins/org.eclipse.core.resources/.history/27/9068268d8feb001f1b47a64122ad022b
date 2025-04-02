@@ -1,0 +1,33 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class RegistrationPage {
+    private WebDriver driver;
+
+    private By firstName = By.id("input-firstname");
+    private By lastName = By.id("input-lastname");
+    private By email = By.id("input-email");
+    private By telephone = By.id("input-telephone");
+    private By password = By.id("input-password");
+    private By confirmPassword = By.id("input-confirm");
+    private By agreeCheckBox = By.name("agree");
+    private By continueButton = By.xpath("//input[@value='Continue']");
+    
+    public RegistrationPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void registerUser(String fName, String lName, String emailValue, String phone, String pass) {
+        driver.findElement(firstName).sendKeys(fName);
+        driver.findElement(lastName).sendKeys(lName);
+        driver.findElement(email).sendKeys(emailValue);
+        driver.findElement(telephone).sendKeys(phone);
+        driver.findElement(password).sendKeys(pass);
+        driver.findElement(confirmPassword).sendKeys(pass);
+        driver.findElement(agreeCheckBox).click();
+        driver.findElement(continueButton).click();
+    }
+}
+

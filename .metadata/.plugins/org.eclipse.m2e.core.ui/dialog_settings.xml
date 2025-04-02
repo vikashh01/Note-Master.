@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\hostingerwebsite\src\test\java\hostingerwebsite\HostingerTest.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\QAFox\src\test\java\test\QafoxTest.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\as\src\test\java\Three\Formy.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\as\src\test\java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\spicejet\src\test\java\spicejet\SpiceJetSignupTest.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\ebay\src\test\java\ebay\com\main.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\TestNG\src\test\java\Test\simpleformregister.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\cucumberAssi\src\test\java\Stepdefinition\nhh.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\git\repository\project\selenium full project\src\main\java\masaiofficeAssignment\RegisterPage.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\selenium\src\main\java\masaiofficeAssi"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\selenium\src\main\java\selenium\Dropdown.java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\Cucumber_with_youtube\pom.xml"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\cucumber"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\Learn_By_ytb\src\main\java"/>
+			<item value="C:\Users\AKASH KUMAR BHARTI\eclipse-workspace\Learn_By_Youtube\src\main\java"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="as"/>
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+		</list>
+		<list key="groupId">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+			<item value="Printeasy"/>
+			<item value="hostingerwebsite"/>
+			<item value="hostinger"/>
+			<item value="day25"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="Printeasy"/>
+			<item value="hostingerwebsite"/>
+			<item value="hostinger"/>
+			<item value="day25"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

@@ -1,0 +1,91 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import java.time.Duration;
+
+public class SignupTest {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/");
+    }
+
+    @Test(priority = 1)
+    public void testSignup() {
+        WebElement signupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button:nth-child(2) strong")));
+        signupBtn.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("vikashkr");
+        driver.findElement(By.id("email")).sendKeys("vikashkr123@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("vikash@123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("vikash@123");
+
+        WebElement finalSignupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button/strong[contains(text(),'Sign Up')]")));
+        finalSignupBtn.click();
+
+    }
+
+    @Test(priority = 2)
+    public void testLogin() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email']"))).sendKeys("vikashkr123@gmail.com");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("vikash@123");
+        driver.findElement(By.xpath("//body//div//div//main//div//div//div//div//div//button")).click();
+
+        // Wait for dashboard page
+        wait.until(ExpectedConditions.urlContains("dashboard"));
+    }
+//
+//    @Test(priority = 3)
+//    public void testCreateNote() throws InterruptedException {
+//        driver.findElement(By.xpath("//strong[normalize-space()='Write Notes']")).click();
+//        driver.findElement(By.xpath("//input[contains(@placeholder,'Notes Title')]")).sendKeys("First Note");
+//        driver.findElement(By.xpath("//div[@class='ql-editor']")).sendKeys("This is my first note.");
+//        driver.findElement(By.xpath("//strong[normalize-space()='Save Changes']")).click();
+//
+//        // Wait for note to be saved
+//        Thread.sleep(3000);
+//    }
+//
+//    @Test(priority = 4)
+//    public void testEditNote() throws InterruptedException {
+//        driver.findElement(By.xpath("//button[contains(text(),'Edit')]")).click();
+//        WebElement editor = driver.findElement(By.xpath("//div[@class='ql-editor']"));
+//        editor.clear();
+//        editor.sendKeys("This is an edited note.");
+//        driver.findElement(By.xpath("//strong[normalize-space()='Save Changes']")).click();
+//
+//        // Wait for update to reflect
+//        Thread.sleep(3000);
+//    }
+//
+//    @Test(priority = 5)
+//    public void testDeleteNote() throws InterruptedException {
+//        driver.findElement(By.xpath("//button[contains(text(),'Delete')]")).click();
+//        driver.switchTo().alert().accept(); // Confirm deletion
+//        Thread.sleep(3000);
+//    }
+//
+//    @Test(priority = 6)
+//    public void testLogout() throws InterruptedException {
+//        driver.findElement(By.xpath("//button[contains(text(),'Logout')]")).click();
+//        wait.until(ExpectedConditions.urlContains("login"));
+//    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

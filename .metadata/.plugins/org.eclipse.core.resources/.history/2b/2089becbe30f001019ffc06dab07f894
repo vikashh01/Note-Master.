@@ -1,0 +1,67 @@
+package AllCover;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+    WebDriverWait wait;
+
+
+    @BeforeTest
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app"); 
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+
+
+    }
+
+    @Test
+    public void Signup() {
+    	driver.findElement(By.xpath("//strong[text()='Sign Up']")).click();
+        
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("Akash");
+        driver.findElement(By.id("email")).sendKeys("akash123@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("akash@123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("akash@123");
+        driver.findElement(By.xpath("//strong[text()='Sign Up']")).click();
+
+    }
+    
+    @Test(dataProvider = "invalidSignupData")
+    public void testInvalidSignup(String name, String email, String password, String confirmPassword, String expectedError) {
+        driver.findElement(By.xpath("//strong[text()='Sign Up']")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).clear();
+        driver.findElement(By.id("name")).sendKeys(name);
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("password")).clear();
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("confirmPassword")).clear();
+        driver.findElement(By.id("confirmPassword")).sendKeys(confirmPassword);
+
+        driver.findElement(By.xpath("//strong[text()='Sign Up']")).click();
+        
+    }
+
+    
+    public void Login() {
+    	
+    }
+
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
+    }
+}

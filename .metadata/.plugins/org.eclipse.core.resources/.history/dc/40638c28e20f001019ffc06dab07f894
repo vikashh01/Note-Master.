@@ -1,0 +1,44 @@
+package AllCover;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class SignupTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app");  
+    }
+
+    @Test
+    public void testSignup() {
+        WebElement nameField = driver.findElement(By.id("name"));  
+        WebElement emailField = driver.findElement(By.id("email")); 
+        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement confirmPasswordField = driver.findElement(By.id("confirmPassword"));
+        WebElement signupButton = driver.findElement(By.xpath("//button[text()='Sign Up']")); 
+
+        nameField.sendKeys("Test User");
+        emailField.sendKeys("testuser@example.com");
+        passwordField.sendKeys("Test@1234");
+        confirmPasswordField.sendKeys("Test@1234");
+
+        signupButton.click();
+
+    }
+
+    @AfterClass
+    public void tearDown() {
+        // Close the browser
+        driver.quit();
+    }
+}

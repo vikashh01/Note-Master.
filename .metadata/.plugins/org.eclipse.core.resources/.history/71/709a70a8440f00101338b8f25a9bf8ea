@@ -1,0 +1,196 @@
+package all;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
+public class PrintEasyTests {
+
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        // Set up WebDriver (Chrome)
+        driver = new ChromeDriver();
+        driver.get("https://printeasy.vercel.app/");
+    }    
+
+    @Test(priority = 1)
+    public void testSignupWithValidCredentials() {
+        driver.findElement(By.linkText("Sign Up")).click();
+        driver.findElement(By.id("username")).sendKeys("newuser");
+        driver.findElement(By.id("email")).sendKeys("newuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("validPassword123");
+        driver.findElement(By.id("signupButton")).click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("welcomeMessage")));
+        assert confirmationMessage.isDisplayed() : "Account creation failed";
+    }
+
+    @Test(priority = 2)
+    public void testLoginWithValidCredentials() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement dashboard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboard")));
+        assert dashboard.isDisplayed() : "Login failed with valid credentials";
+    }
+
+    @Test(priority = 3)
+    public void testLoginWithInvalidCredentials() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("invaliduser@example.com");
+        driver.findElement(By.id("password")).sendKeys("invalidPassword");
+        driver.findElement(By.id("loginButton")).click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("errorMessage")));
+        assert errorMessage.isDisplayed() : "Error message not displayed for invalid login";
+    }
+
+    @Test(priority = 4)
+    public void testDashboardNavigation() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement dashboard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboard")));
+        dashboard.findElement(By.linkText("Profile")).click();
+        WebElement profilePage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("profilePage")));
+        assert profilePage.isDisplayed() : "Profile page is not accessible";
+    }
+
+    @Test(priority = 5)
+    public void testProfileManagement() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.linkText("Profile")).click();
+        driver.findElement(By.id("editProfile")).click();
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys("Updated Name");
+        driver.findElement(By.id("updateProfile")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("successMessage")));
+        assert successMessage.isDisplayed() : "Profile update failed";
+    }
+
+    @Test(priority = 6)
+    public void testAddAndRemoveItemsFromCart() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.id("product1")).click();
+        driver.findElement(By.id("addToCart")).click();
+        driver.findElement(By.id("cart")).click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement cartItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cartItem1")));
+        assert cartItem.isDisplayed() : "Item not added to cart";
+
+        driver.findElement(By.id("removeItem")).click();
+        WebElement emptyCartMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("emptyCartMessage")));
+        assert emptyCartMessage.isDisplayed() : "Cart is not empty after removal";
+    }
+
+    @Test(priority = 7)
+    public void testOrderPlacement() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.id("product1")).click();
+        driver.findElement(By.id("addToCart")).click();
+        driver.findElement(By.id("cart")).click();
+        driver.findElement(By.id("proceedToCheckout")).click();
+
+        driver.findElement(By.id("paymentMethod")).click();
+        driver.findElement(By.id("confirmOrder")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement orderConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("orderConfirmation")));
+        assert orderConfirmation.isDisplayed() : "Order placement failed";
+    }
+
+    @Test(priority = 8)
+    public void testPaymentProcessing() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.id("product1")).click();
+        driver.findElement(By.id("addToCart")).click();
+        driver.findElement(By.id("cart")).click();
+        driver.findElement(By.id("proceedToCheckout")).click();
+
+        driver.findElement(By.id("paymentMethod")).click();
+        driver.findElement(By.id("selectPaymentGateway")).sendKeys("Credit Card");
+        driver.findElement(By.id("confirmPayment")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement paymentConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("paymentConfirmation")));
+        assert paymentConfirmation.isDisplayed() : "Payment processing failed";
+    }
+
+    @Test(priority = 9)
+    public void testFileUpload() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.linkText("Profile")).click();
+        driver.findElement(By.id("uploadFile")).sendKeys("path/to/valid/file.jpg");
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement uploadSuccessMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("uploadSuccessMessage")));
+        assert uploadSuccessMessage.isDisplayed() : "File upload failed";
+
+        // Handle invalid file type
+        driver.findElement(By.id("uploadFile")).sendKeys("path/to/invalid/file.txt");
+        WebElement uploadErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("uploadErrorMessage")));
+        assert uploadErrorMessage.isDisplayed() : "Error message not shown for invalid file type";
+    }
+
+    @Test(priority = 10)
+    public void testLogout() {
+        driver.findElement(By.linkText("Login")).click();
+        driver.findElement(By.id("email")).sendKeys("validuser@example.com");
+        driver.findElement(By.id("password")).sendKeys("validPassword123");
+        driver.findElement(By.id("loginButton")).click();
+
+        driver.findElement(By.id("logoutButton")).click();
+        
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("loginButton")));
+        assert loginButton.isDisplayed() : "Logout failed, login button is not displayed";
+    }
+    
+    @AfterMethod
+    public void tearDown() {
+        // Close browser after each test
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}

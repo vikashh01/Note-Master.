@@ -1,0 +1,101 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import java.time.Duration;
+
+public class SignupTest {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeMethod(alwaysRun = true)
+    public void setup() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/");
+    }
+
+    @Test(priority = 1)
+    public void testSignup() {
+        WebElement signupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button:nth-child(2) strong")));
+        signupBtn.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("vikashkr");
+        driver.findElement(By.id("email")).sendKeys("vikashkr123@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("vikash@123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("vikash@123");
+
+        WebElement finalSignupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button/strong[contains(text(),'Sign Up')]")));
+        finalSignupBtn.click();
+
+    }
+
+    @Test(priority = 2)
+    public void testLogin() throws InterruptedException {
+    	driver.get("https://notes-makers.vercel.app/pages/login");
+        driver.findElement(By.xpath("//input[@id='email']")).sendKeys("vikashkr123@gmail.com");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("vikash@123");
+        driver.findElement(By.xpath("//body//div//div//main//div//div//div//div//div//button")).click();
+
+    }
+
+    @Test(priority = 3)
+    public void testCreateNote() throws InterruptedException {
+        driver.get("https://notes-makers.vercel.app/pages/notes");
+
+        WebElement writeNotesBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//strong[normalize-space()='Write Notes']")));
+        writeNotesBtn.click();
+
+        WebElement titleInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[placeholder='Notes Title']")));
+        titleInput.sendKeys("First Note");
+
+        WebElement editor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ql-editor")));
+        editor.click(); // Ensure focus
+        editor.sendKeys("This is my first note.");
+
+        WebElement saveBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//strong[normalize-space()='Save Changes']")));
+        saveBtn.click();
+
+        Thread.sleep(3000);
+    }
+
+
+    @Test(priority = 4)
+    public void createnotebook() throws InterruptedException {
+    	driver.get("https://notes-makers.vercel.app/pages/notes");
+        driver.findElement(By.xpath("//strong[normalize-space()='Create NoteBook']")).click();
+        WebElement title = driver.findElement(By.xpath("//input[@id='title']"));
+        title.sendKeys("This is an new notes.");
+        driver.findElement(By.xpath("//strong[normalize-space()='Submit']")).click();
+
+        Thread.sleep(3000);
+    }
+
+    @Test(priority = 5)
+    public void EditNote() throws InterruptedException {
+        driver.findElement(By.xpath("//strong[normalize-space()='Edit']")).click();
+        driver.findElement(By.xpath("//div[contains(@class,'ql-editor ql-blank')]")).sendKeys("New update");
+        Thread.sleep(3000);
+    }
+//
+//    @Test(priority = 6)
+//    public void testLogout() throws InterruptedException {
+//        driver.findElement(By.xpath("//button[contains(text(),'Logout')]")).click();
+//        wait.until(ExpectedConditions.urlContains("login"));
+//    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        driver.quit();
+    }
+}

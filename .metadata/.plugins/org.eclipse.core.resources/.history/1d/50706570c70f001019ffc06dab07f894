@@ -1,0 +1,58 @@
+package FullProject;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import java.time.Duration;
+
+public class SignupTest {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/");
+    }
+
+    @Test
+    public void testSignup() {
+        // Locate and fill the Name field
+        WebElement nameField = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='Enter your name']")));
+        nameField.sendKeys("Test User");
+
+        // Locate and fill the Email field
+        WebElement emailField = driver.findElement(By.xpath("//input[@placeholder='Enter your email']"));
+        emailField.sendKeys("testuser123@gmail.com");
+
+        // Locate and fill the Password field
+        WebElement passwordField = driver.findElement(By.xpath("//input[@placeholder='Enter your password']"));
+        passwordField.sendKeys("Test@1234");
+
+        // Locate and fill the Confirm Password field
+        WebElement confirmPasswordField = driver.findElement(By.xpath("//input[@placeholder='Confirm your password']"));
+        confirmPasswordField.sendKeys("Test@1234");
+
+        // Click the Sign Up button
+        WebElement signUpButton = driver.findElement(By.xpath("//button[text()='Sign Up']"));
+        signUpButton.click();
+
+        // Validate successful sign-up (Modify the condition based on the actual success message)
+        WebElement successMessage = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(), 'Dashboard')]"))); 
+        Assert.assertTrue(successMessage.isDisplayed(), "Sign-up failed!");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

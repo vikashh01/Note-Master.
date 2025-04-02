@@ -1,0 +1,55 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class RegistrationPage {
+	
+	public static void main(String[] args) throws InterruptedException {
+		
+		
+		WebDriver driver = new ChromeDriver();	
+		driver.manage().window().maximize();
+		driver.get("https://demo.automationtesting.in/Register.html");
+		Thread.sleep(2000);
+		
+		
+		WebElement fname =  driver.findElement(By.xpath("//input[@placeholder='First Name']"));
+		fname.sendKeys("Vikash Kumar");
+		
+		WebElement lname =  driver.findElement(By.xpath("//input[@placeholder='Last Name']"));
+		lname.sendKeys("Bharti");
+		
+		WebElement address =  driver.findElement(By.xpath("//textarea[@class='form-control ng-pristine ng-untouched ng-valid']"));
+		address.sendKeys("Patna (Bihar)");
+		
+		
+		WebElement email = driver.findElement(By.xpath("//input[@type='email']"));
+		email.sendKeys("vikashkumarbharti035@gmail.com");
+		
+		WebElement num = driver.findElement(By.xpath("//input[@type='tel']"));
+		num.sendKeys("6201530961");
+		
+		WebElement gen = driver.findElement(By.xpath("//input[@value='Male']"));
+		gen.click();
+		
+		WebElement hob = driver.findElement(By.id("checkbox1"));
+		hob.click();
+		
+		WebElement language = driver.findElement(By.id("msdd"));
+		num.sendKeys("English");
+		
+		
+		
+	
+		
+		
+		
+	}
+
+	
+    
+}
+

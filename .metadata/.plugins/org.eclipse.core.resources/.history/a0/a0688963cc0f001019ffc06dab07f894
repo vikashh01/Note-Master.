@@ -1,0 +1,65 @@
+package FullProject;
+
+import org.checkerframework.checker.calledmethods.qual.EnsuresCalledMethods.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import java.time.Duration;
+
+public class SignupTest {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get("https://notes-makers.vercel.app/");
+    }
+
+    @Test(priority = 1)
+    public void testSignup() {
+        WebElement signupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button:nth-child(2) strong")));
+        signupBtn.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys("vikashkr");
+        driver.findElement(By.id("email")).sendKeys("vikashkr@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("vikash@123");
+        driver.findElement(By.id("confirmPassword")).sendKeys("vikash@123");
+
+        WebElement finalSignupBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body//div//div//main//div//div//div//div//div//button//strong[contains(text(),'Sign Up')]")));
+        finalSignupBtn.click();
+    }
+    
+    @Test(priority = 2)
+    public void Login() throws InterruptedException {
+        
+        driver.findElement(By.xpath("//input[@id='email']")).sendKeys("vikash@gmail.com");
+        driver.findElement(By.xpath("//input[@id='password']")).sendKeys("vikash123");
+        
+        driver.findElement(By.xpath("//button/strong[contains(text(),'Login')]")).click();
+        
+        Thread.sleep(3000);
+    }
+    
+    @Test
+    public void create() {
+    	
+    	driver.findElement(By.xpath("//strong[normalize-space()='Write Notes']")).click();
+    	driver.findElement(By.xpath("//input[contains(@placeholder,'Notes Title')]")).sendKeys("FirstPage");
+    	driver.findElement(By.xpath("//div[@class='ql-editor ql-blank']")).sendKeys("This is first comment");
+    	
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}

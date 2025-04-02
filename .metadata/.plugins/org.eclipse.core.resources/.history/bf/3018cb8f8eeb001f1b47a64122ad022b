@@ -1,0 +1,21 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoginPage {
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get("https://www.opencart.com/index.php?route=account/login");
+		driver.manage().window().maximize();
+		Thread.sleep(2000);
+		
+		driver.findElement(By.xpath("//input[@id='username']")).sendKeys("vikash Kumar Bharti");
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("6648754242");
+		
+		driver.findElement(By.xpath("//button[@id='submit']")).click();
+	}
+    
+}
