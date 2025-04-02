@@ -35,9 +35,11 @@ The Notes Makers web application is designed to allow users to create, edit, del
 - UI testing to ensure a consistent experience.
 - Negative testing for handling invalid inputs.
 
-### Automation Testing (if applicable):
-- Regression testing using test scripts.
-- Smoke and sanity checks for critical flows.
+### Automation Testing:
+- Automate test cases using **Selenium with Java and TestNG**.
+- Implement explicit waits for smooth execution.
+- Execute **smoke, sanity, and regression** tests.
+- Run automation scripts on different browsers using **TestNG parallel execution**.
 
 ### Compatibility Testing:
 - Testing on different browsers (Chrome, Firefox, Edge, Safari)
